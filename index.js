@@ -1,11 +1,10 @@
 const sketchContainer = document.querySelector('#sketchContainer');
-sketchContainer.setAttribute('style', 'display: grid; background-color: #bebcbb; row-gap: 1px;')
 
-const gridWidth = 800
-sketchContainer.style.width = `${gridWidth}px`
-sketchContainer.style.height = `${gridWidth}px`
 
-const gridSize = 16;
+sketchContainer.style.width = '530px'
+sketchContainer.style.height = '530px'
+
+const gridSize = 20;
 
 for (let row = 0; row < gridSize; row++){
     let newRow = document.createElement('div');

@@ -1,6 +1,28 @@
+body{
+    background-color:lightgray;
+}
+
 .top{
     display: flex;
     color: red;
     justify-content: center;
 }
 
+#wrapper{
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+    position: relative;
+}
+
+#sketchContainer {
+    display: grid;
+    row-gap: 1px;
+    position: absolute;
+    margin: auto;
+    left: 44px;
+    right: 0;
+    top: 0;
+    bottom: 26px;
+}
