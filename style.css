@@ -18,11 +18,13 @@ body{
 
 #sketchContainer {
     display: grid;
+    width: 530px;
+    height: 530px;
     row-gap: 1px;
     position: absolute;
     margin: auto;
     left: 44px;
     right: 0;
     top: 0;
-    bottom: 26px;
+    bottom: 105px;
 }
