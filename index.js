@@ -12,6 +12,7 @@ function refreshGrid() {
     while (sketchContainer.firstChild) {
         sketchContainer.removeChild(sketchContainer.firstChild);
     }
+    
 }
 
 function runMain(){
@@ -98,32 +99,139 @@ document.getElementById('sketchWrapper').addEventListener('animationend', functi
 runMain();
 
 // use keyboard?
-const keyboardMode = document.querySelector('#keyboardCheck');
-keyboardMode.addEventListener('change', startKeyBoardMode);
+const keyboardModeCB = document.querySelector('#keyboardCB');
+keyboardModeCB.addEventListener('change', initKeyBoardMode);
 
 const sketchRightDiv = document.getElementById('sketchRight')
 const sketchLeftDiv = document.getElementById('sketchLeft')
 
-function startKeyBoardMode(){
+let currentSquarePosition;
+
+function initKeyBoardMode(){
     if (this.checked){
         refreshGrid();
         runMain();
         sketchRightDiv.innerText = "Click anywhere on the grid as the starting point for the keyboard";
         sketchRightDiv.setAttribute('style', "display: block;")
         
-        const keyBoardHelper = () =>{
+        function keyBoardHelper(event){
             sketchRightDiv.setAttribute('style', "display: none;")
             sketchContainer.removeEventListener('click', keyBoardHelper);
             sketchContainer.setAttribute('style', 'pointer-events: none'); // remove mouse input, keyboard only
             sketchLeftDiv.innerText = "Tap the arrow keys to draw!\n\nUnselect keyboard mode to use the mouse again.";
-            sketchLeftDiv.setAttribute('style', "display: block;")
+            sketchLeftDiv.setAttribute('style', "display: block;");
+
+            // not single clicked a square but dragged accross the grid
+            if (window.getComputedStyle(event.target, null).display !== 'block'){ 
+                sketchLeftDiv.innerText = "Click a single square to start.\n\nRe-select keyboard mode to try again.";
+                return;
+            }
+            currentSquarePosition = event.target;
+
+            // prevent arrow controlling of buttons if changed or clicked during keyboard mode
+            window.addEventListener("keydown", function(e) {
+                if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+                    e.preventDefault();
+                }
+            }, false);
+
+            document.addEventListener('keyup', function(event){
+                sendKeys(currentSquarePosition, event);
+            }, false);
         }
+        
         sketchContainer.addEventListener('click', keyBoardHelper)
         
     }else{
         sketchRightDiv.setAttribute('style', "display: none;")
         sketchLeftDiv.setAttribute('style', "display: none;")
         sketchContainer.setAttribute('style', 'pointer-events: auto'); // reinstate mouse input
+        document.removeEventListener('keyup', sendKeys)
     }
 }
 
+function sendKeys(thisSquare, event){
+    switch (event.code){
+        case 'ArrowUp':
+            arrowUp(thisSquare);
+            break;
+        case 'ArrowDown':
+            arrowDown(thisSquare)
+            break;
+        case 'ArrowLeft':
+            arrowLeft(thisSquare)
+            break;
+        case 'ArrowRight':
+            arrowRight(thisSquare)
+            break;
+    }
+}
+
+
+// node to the left is just previous sibling
+function arrowLeft(thisSquare){ 
+    if(thisSquare.previousSibling !== null){
+        currentSquarePosition = thisSquare.previousSibling;
+        keyBoardColor(currentSquarePosition);
+    }
+}
+
+
+// node to the right is just next sibling
+function arrowRight(thisSquare){ 
+    if(thisSquare.nextSibling !== null){
+        currentSquarePosition = thisSquare.nextSibling;
+        keyBoardColor(currentSquarePosition);
+    }
+}
+
+// node above, get current index in relation to parent. Get parent's previous sibling,
+// then use the same index to get their correseponding child (node above)
+function arrowUp(thisSquare){
+    nodeIndex = Array.prototype.indexOf.call(thisSquare.parentNode.children, thisSquare);
+    if (thisSquare.parentNode.previousSibling !== null){
+        nodeAbove = thisSquare.parentNode.previousSibling.children[nodeIndex];
+        currentSquarePosition = nodeAbove;
+        keyBoardColor(currentSquarePosition);
+    }
+}
+
+// node below, get current index in relation to parent. Get parent's next sibling,
+// then use the same index to get their correseponding child (node below)
+function arrowDown(thisSquare){
+    nodeIndex = Array.prototype.indexOf.call(thisSquare.parentNode.children, thisSquare);
+    if (thisSquare.parentNode.nextSibling !== null){
+        nodeBelow = thisSquare.parentNode.nextSibling.children[nodeIndex];
+        currentSquarePosition = nodeBelow;
+        keyBoardColor(currentSquarePosition);
+    }
+
+}
+
+
+function keyBoardColor(thisSquare){
+
+        // colors
+        if (selectedColor === 'rainbow'){ 
+            color = rainbowColors[Math.floor(Math.random()*rainbowColors.length)]
+        }else{
+            color = selectedColor;
+        }
+
+        // water color effect (adds 10% to opacity on each pass)
+        if (color !== 'white' && waterColorCB.checked){ // not white (eraser)
+                if (thisSquare.style.opacity !== ''){
+                    newOpacity = parseFloat(square.style.opacity) + 0.1;
+                }else{
+                    newOpacity = 0.1
+                }
+                thisSquare.setAttribute('style', `background-color: ${color}; opacity: ${newOpacity};`);
+            }else{
+                thisSquare.setAttribute('style', `background-color: ${color};`);
+        }
+    };
+
+// todo: on finer grids, the keyup event is shading 3 divs at a time - bug
+// todo: remove keyboard mode check on grid resize or "shake"
+// todo: tidy code.
+// todo: css

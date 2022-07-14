@@ -25,6 +25,7 @@ body{
 /* align the top h1 with the wrapper below on resize */
 .top{
    grid-area: head;
+   
 }
 
 #leftButtons{
