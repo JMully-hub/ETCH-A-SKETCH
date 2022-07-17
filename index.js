@@ -15,48 +15,66 @@ function refreshGrid() {
     
 }
 
+function keyDownFunc(keyEvent){
+    sendSquare = currentSquarePosition
+    sendKeys(sendSquare, keyEvent);
+};
+
+
 function runMain(){
+    //document.removeEventListener('keydown', document.keyDownFunc, false)
     for (let row = 0; row < gridSize; row++){
         let newRow = document.createElement('div');
         newRow.setAttribute('style', 'display: grid; column-gap: 1px;');
         newRow.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+
         for (let square = 0; square < gridSize; ++square){
             let newSquare = document.createElement('div');
             newSquare.setAttribute('style', 'background-color: white;')
-            
-            const colorSquare = () =>{
-                // colors
-                if (selectedColor === 'rainbow'){ 
-                    color = rainbowColors[Math.floor(Math.random()*rainbowColors.length)]
-                }else{
-                    color = selectedColor;
-                }
 
-                // water color effect (adds 10% to opacity on each pass)
-                if (color !== 'white' && waterColorCB.checked){ // not white (eraser)
-                        if (newSquare.style.opacity !== ''){
-                            newOpacity = parseFloat(newSquare.style.opacity) + 0.1;
-                        }else{
-                            newOpacity = 0.1
-                        }
-                        newSquare.setAttribute('style', `background-color: ${color}; opacity: ${newOpacity};`);
-                    }else{
-                        newSquare.setAttribute('style', `background-color: ${color};`);
-                }
-            };
+                        
             //colorSquare called for both mousedown and mouseover, otherwise wont color the first clicked square
-            newSquare.addEventListener('mousedown', colorSquare); 
+            newSquare.addEventListener('mousedown', function(mouseEvent){
+                colorThisSquare(newSquare);
+                currentSquarePosition = newSquare;
+            }, false);
+            
             newSquare.addEventListener('mouseover', function(){
                 if (mouseIsDown){
-                    colorSquare();
+                    colorThisSquare(newSquare);
+                    currentSquarePosition = newSquare;
                 }
-            });
+            }); 
             newRow.appendChild(newSquare);
         }
         sketchContainer.appendChild(newRow);
     }
 
 }
+
+
+
+function colorThisSquare(thisSquare){
+
+    // colors
+    if (selectedColor === 'rainbow'){ 
+        color = rainbowColors[Math.floor(Math.random()*rainbowColors.length)]
+    }else{
+        color = selectedColor;
+    }
+
+    // water color effect (adds 10% to opacity on each pass)
+    if (color !== 'white' && waterColorCB.checked){ // not white (eraser)
+            if (thisSquare.style.opacity !== ''){
+                newOpacity = parseFloat(square.style.opacity) + 0.1;
+            }else{
+                newOpacity = 0.1
+            }
+            thisSquare.setAttribute('style', `background-color: ${color}; opacity: ${newOpacity};`);
+        }else{
+            thisSquare.setAttribute('style', `background-color: ${color};`);
+    }
+};
 
 const sketchContainer = document.querySelector('#sketchContainer');
 
@@ -82,6 +100,8 @@ let mouseIsDown = false;
 document.addEventListener('mousedown', function(){mouseIsDown = true});
 document.addEventListener('mouseup', function(){mouseIsDown = false});
 
+document.addEventListener('keydown', keyDownFunc, false);
+
 document.body.setAttribute('ondragstart', "return false;"); // stop dragging behaviour
 
 // Animation  -shake the etch a sketch and clear the sketch
@@ -96,74 +116,36 @@ document.getElementById('sketchWrapper').addEventListener('animationend', functi
 });
 
 
-runMain();
+
+// prevent arrow controlling of buttons if changed or clicked during keyboard mode
+window.addEventListener("keydown", function(e) {
+    if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
 
 // use keyboard?
+
+
+
 const keyboardModeCB = document.querySelector('#keyboardCB');
-keyboardModeCB.addEventListener('change', initKeyBoardMode);
+//window.addEventListener('keydown', initKeyBoardMode);
 
 const sketchRightDiv = document.getElementById('sketchRight')
 const sketchLeftDiv = document.getElementById('sketchLeft')
 
 let currentSquarePosition;
 
-function initKeyBoardMode(){
-    if (this.checked){
-        refreshGrid();
-        runMain();
-        sketchRightDiv.innerText = "Click anywhere on the grid as the starting point for the keyboard";
-        sketchRightDiv.setAttribute('style', "display: block;")
-        
-        function keyBoardHelper(event){
-            sketchRightDiv.setAttribute('style', "display: none;")
-            sketchContainer.removeEventListener('click', keyBoardHelper);
-            sketchContainer.setAttribute('style', 'pointer-events: none'); // remove mouse input, keyboard only
-            sketchLeftDiv.innerText = "Tap the arrow keys to draw!\n\nUnselect keyboard mode to use the mouse again.";
-            sketchLeftDiv.setAttribute('style', "display: block;");
-
-            // not single clicked a square but dragged accross the grid
-            if (window.getComputedStyle(event.target, null).display !== 'block'){ 
-                sketchLeftDiv.innerText = "Click a single square to start.\n\nRe-select keyboard mode to try again.";
-                return;
-            }
-            currentSquarePosition = event.target;
-
-            // prevent arrow controlling of buttons if changed or clicked during keyboard mode
-            window.addEventListener("keydown", function(e) {
-                if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
-                    e.preventDefault();
-                }
-            }, false);
-
-            document.addEventListener('keyup', function(event){
-                sendKeys(currentSquarePosition, event);
-            }, false);
-        }
-        
-        sketchContainer.addEventListener('click', keyBoardHelper)
-        
-    }else{
-        sketchRightDiv.setAttribute('style', "display: none;")
-        sketchLeftDiv.setAttribute('style', "display: none;")
-        sketchContainer.setAttribute('style', 'pointer-events: auto'); // reinstate mouse input
-        document.removeEventListener('keyup', sendKeys)
-    }
-}
-
 function sendKeys(thisSquare, event){
     switch (event.code){
         case 'ArrowUp':
-            arrowUp(thisSquare);
-            break;
+            return arrowUp(thisSquare);
         case 'ArrowDown':
-            arrowDown(thisSquare)
-            break;
+            return arrowDown(thisSquare)
         case 'ArrowLeft':
-            arrowLeft(thisSquare)
-            break;
+            return arrowLeft(thisSquare)
         case 'ArrowRight':
-            arrowRight(thisSquare)
-            break;
+            return arrowRight(thisSquare)
     }
 }
 
@@ -172,7 +154,7 @@ function sendKeys(thisSquare, event){
 function arrowLeft(thisSquare){ 
     if(thisSquare.previousSibling !== null){
         currentSquarePosition = thisSquare.previousSibling;
-        keyBoardColor(currentSquarePosition);
+        colorThisSquare(currentSquarePosition);
     }
 }
 
@@ -181,7 +163,7 @@ function arrowLeft(thisSquare){
 function arrowRight(thisSquare){ 
     if(thisSquare.nextSibling !== null){
         currentSquarePosition = thisSquare.nextSibling;
-        keyBoardColor(currentSquarePosition);
+        colorThisSquare(currentSquarePosition);
     }
 }
 
@@ -192,7 +174,7 @@ function arrowUp(thisSquare){
     if (thisSquare.parentNode.previousSibling !== null){
         nodeAbove = thisSquare.parentNode.previousSibling.children[nodeIndex];
         currentSquarePosition = nodeAbove;
-        keyBoardColor(currentSquarePosition);
+        colorThisSquare(currentSquarePosition);
     }
 }
 
@@ -203,35 +185,13 @@ function arrowDown(thisSquare){
     if (thisSquare.parentNode.nextSibling !== null){
         nodeBelow = thisSquare.parentNode.nextSibling.children[nodeIndex];
         currentSquarePosition = nodeBelow;
-        keyBoardColor(currentSquarePosition);
+        colorThisSquare(currentSquarePosition);
     }
 
 }
 
+runMain();
 
-function keyBoardColor(thisSquare){
-
-        // colors
-        if (selectedColor === 'rainbow'){ 
-            color = rainbowColors[Math.floor(Math.random()*rainbowColors.length)]
-        }else{
-            color = selectedColor;
-        }
-
-        // water color effect (adds 10% to opacity on each pass)
-        if (color !== 'white' && waterColorCB.checked){ // not white (eraser)
-                if (thisSquare.style.opacity !== ''){
-                    newOpacity = parseFloat(square.style.opacity) + 0.1;
-                }else{
-                    newOpacity = 0.1
-                }
-                thisSquare.setAttribute('style', `background-color: ${color}; opacity: ${newOpacity};`);
-            }else{
-                thisSquare.setAttribute('style', `background-color: ${color};`);
-        }
-    };
-
-// todo: on finer grids, the keyup event is shading 3 divs at a time - bug
-// todo: remove keyboard mode check on grid resize or "shake"
+// todo: add code to prevent JS error if keydown and mouse not clicked in grid area
 // todo: tidy code.
 // todo: css

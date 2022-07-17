@@ -1,5 +1,5 @@
 body{
-    background-color:lightgray;
+    background-color:rgb(64, 64, 119);
 
     /* to remove unwanted highlighting of text */
     -webkit-touch-callout: none;
