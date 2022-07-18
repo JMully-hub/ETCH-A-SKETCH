@@ -1,5 +1,8 @@
 body{
     background-color:rgb(64, 64, 119);
+    background: linear-gradient(-45deg, #e2592f, #dd1964, #0faee7, #16d861);
+    background-size: 200% 200%; 
+    
 
     /* to remove unwanted highlighting of text */
     -webkit-touch-callout: none;
@@ -9,6 +12,8 @@ body{
     -ms-user-select: none;
     user-select: none;
 }
+
+
 
 .mainContainer{
     display: grid;
@@ -61,31 +66,26 @@ body{
 }
 
 #sketchLeft{
-    display: none;
     grid-area: sketch_left;
-    text-align: center; 
-    padding: 25px; 
-    height: 120px; 
-    width: 120px;
-    margin-top: 350px;
-    justify-self: center;
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 60px;
 }
 
 #sketchRight{
-    display: none;
     grid-area: sketch_right; 
-    text-align: center; 
-    padding: 10px;
-    height: 120px; 
-    width: 120px;
-    justify-self: center; 
-    margin-top: 350px;
-    border-radius: 60px;
-    background-color: rgba(255,255,255,0.5);
 }
 
+.dial{
+    height: 150px;
+    position: absolute;
+    bottom: 0;
+}
+
+#rightDial{
+    right: 0;
+}
+
+#leftDial{
+    left: 0;
+}
 
 
 /* dynamically added in js when "Shake!" button clicked */
