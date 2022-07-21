@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
+
 body{
-    background-color:rgb(64, 64, 119);
-    background: linear-gradient(-45deg, #e2592f, #dd1964, #0faee7, #16d861);
-    background-size: 200% 200%; 
-    
+    position: fixed;
+    margin: 0;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
+  
+    background: no-repeat center center fixed;
+    background-image: radial-gradient(#fdfdfd, #3e3f55);
 
     /* to remove unwanted highlighting of text */
     -webkit-touch-callout: none;
@@ -14,36 +19,137 @@ body{
 }
 
 
-
 .mainContainer{
+    margin-top: 100px;
     display: grid;
-    max-width: 1920px; 
-    grid-template-columns: minmax(200px, 300px) 1005px minmax(200px, 300px);
+    width: 100vw; 
+    grid-template-columns: 1fr 1005px 1fr;
     position: relative;
     justify-items: center;
-    grid-template-areas: 
-    "head head head"
-    "left middle right";
+    grid-template-areas:
+    "left_buttons middle_content right_buttons";
 }
 
 
 /* align the top h1 with the wrapper below on resize */
 .top{
-   grid-area: head;
-   
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin-top: 20px;
+    height: 60px;
+    width: 100%;
+    font-family: 'Bungee Inline', cursive;
+    font-size: 60px;
+    text-align: center;
+    color:rgb(255, 79, 79);
 }
+
 
 #leftButtons{
-    grid-area: left;
+    grid-area: left_buttons;
+    font-family: 'Bungee Inline', cursive;
 }
 
+
+#colorSelector input{
+    appearance: none;
+
+    padding:0;
+    border-radius:0;
+    vertical-align: middle;
+    outline:0;
+    width: 50px;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 0;
+    border-radius: 25px;
+
+}
+
+#colorSelector input:checked{
+    box-shadow: 0px 0px;
+    border: 1px rgb(0, 0, 0) solid;
+    background-clip: margin-box;
+    transition:250ms;
+}
+
+
+#black{
+    background: rgb(29, 29, 29); 
+    box-shadow: 5px 5px #000000;
+}
+#red{
+    background: red;
+    box-shadow: 5px 5px #9c1616;
+}
+#blue{
+    background: blue; 
+    box-shadow: 5px 5px #0000b3
+    ;
+}
+#green{
+    background: green; 
+    box-shadow: 5px 5px #006400;
+}
+#yellow{
+    background: yellow; 
+    box-shadow: 5px 5px #afaf00;
+}
+#pink{
+    background: pink; 
+    box-shadow: 5px 5px rgb(226, 161, 172);
+}
+#rainbow{
+    background: yellow; 
+    box-shadow: 5px 5px red;
+}
+#eraser{
+    background: white; 
+    box-shadow: 5px 5px rgb(187, 187, 187);
+}
+
+#colorSelector label{
+    display: flex;
+    padding-top: 10px;
+
+}
+
+label[for="black"]{
+    color: black;
+}
+label[for="red"]{
+    color: red;
+}
+label[for="blue"]{
+    color: blue;
+}
+label[for="green"]{
+    color: green;
+}
+label[for="yellow"]{
+    color: yellow;
+}
+label[for="pink"]{
+    color: pink;
+}
+label[for="rainbow"]{
+    color: rgb(0, 128, 43);
+}
+label[for="eraser"]{
+    color: white;
+}
+
+
+
 #rightButtons {
-    grid-area: right;
+    grid-area: right_buttons;
+    font-family: 'Bungee Inline', cursive;
 }
 
 #sketchWrapper{
     display: grid;
-    grid-area: middle;
+    grid-area: middle_content;
     position: relative;
     justify-content: center;
     grid-template-columns: 237px 530px 237px; 
@@ -53,6 +159,7 @@ body{
 
 #sketchContainer {
     grid-area: sketch_middle;
+    background-color: rgb(245, 245, 245);
     display: grid; 
     width: 530px;
     height: 530px;
@@ -85,6 +192,41 @@ body{
 
 #leftDial{
     left: 0;
+}
+
+footer{
+    position: fixed;
+    display: grid;
+    left: 0;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    background-color: rgba(151, 154, 167);
+    font-size: 18px;
+    grid-template-areas: "footer_left footer_middle footer_right";
+    grid-template-columns: 1fr 30px 1fr;
+    
+    
+}
+footer p{
+    grid-area: footer_left;
+    text-align: end;
+    margin: 0px; 
+    padding-top: 5px;
+}
+
+.githubLogo{
+    grid-area: footer_middle;
+    height: 20px;
+    justify-self: center;
+    padding-top: 4px;
+}
+
+footer a{
+    grid-area: footer_right;
+    text-align: left;
+    margin: 0px; 
+    padding-top: 5px;
 }
 
 

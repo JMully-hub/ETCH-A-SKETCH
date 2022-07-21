@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JMully's Etch-a-Sketch</title>
+    <title>Mully's Etch-a-Sketch</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="mainContainer">
 
-      <h1 class="top">JMully's Etch-a-Sketch</h1>
+      <p class="top">Mully's etch-a-sketch</p>
 
       <div id="leftButtons">
         <form id="colorSelector">
@@ -31,13 +31,6 @@
           <input type="radio" id="eraser" name="color" value="white">
           <label for="eraser">Eraser</label><br>
         </form>
-        <br>
-        <label for="waterColor">Water Color Mode</label>
-        <input name="waterColor" id="waterColor" type="checkbox">
-        <br><br>
-        <label for="gridSize">Grid Density</label>
-        <input type="range" min=8 max="120" value=16 class="slider" id="gridSize">
-        <div id="sliderOutput"></div>
       </div>
 
       <div id="sketchWrapper">
@@ -52,9 +45,21 @@
       </div>
 
       <div id="rightButtons">
+        <label for="waterColor">Water Color Mode</label>
+        <input name="waterColor" id="waterColor" type="checkbox">
+        <br><br>
+        <label for="gridSize">Grid Density</label>
+        <input type="range" min=8 max="120" value=16 class="slider" id="gridSize">
+        <div id="sliderOutput"></div>
+        <br>
         <button id="shake" title="Clear all">Shake!</button>
       </div>
     </div>
 	<script src="index.js"></script>
   </body>
+  <footer>
+      <p>by Mully | </p>
+      <img class="githubLogo" src="GitHub-Mark-32px.png">
+      <a href="https://github.com/JMully-hub/ETCH-A-SKETCH"> JMully</a>
+  </footer>
 </html>

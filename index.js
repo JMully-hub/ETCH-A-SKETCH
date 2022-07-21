@@ -106,8 +106,8 @@ function turnDialsOnMouse(thisSquare){
             return;
         } 
         nodeIndex = Array.prototype.indexOf.call(thisSquare.parentNode.children, thisSquare);
-        nodeBelow = thisSquare.parentNode.nextSibling.children[nodeIndex];
-        nodeAbove = thisSquare.parentNode.previousSibling.children[nodeIndex];
+        nodeBelow = () => {thisSquare.parentNode.nextSibling.children[nodeIndex] ?? null};
+        nodeAbove = () => {thisSquare.parentNode.previousSibling.children[nodeIndex] ?? null};
         if (nodeBelow === previousSquare){
             rotateDials('up');
         }else{
