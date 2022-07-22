@@ -1,11 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Inline&display=swap');
 
 body{
-    position: fixed;
     margin: 0;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: 'Bungee', cursive;
 
-  
     background: no-repeat center center fixed;
     background-image: radial-gradient(#fdfdfd, #3e3f55);
 
@@ -42,19 +40,34 @@ body{
     font-family: 'Bungee Inline', cursive;
     font-size: 60px;
     text-align: center;
-    color:rgb(255, 79, 79);
+    color: #e03131;
+    text-shadow: -1px -1px 0 #331d1d, 1px -1px 0 #331d1d, -1px 1px 0 #331d1d, 1px 1px 0 #331d1d;
 }
 
 
 #leftButtons{
     grid-area: left_buttons;
-    font-family: 'Bungee Inline', cursive;
+    font-size: 25px;
+}
+
+.buttonDiv{
+display: flex;
+margin-top: 40px;
+}
+
+#colorSelector label{
+    margin-left: 20px;
+    margin-top: 22px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px;
 }
 
 
 #colorSelector input{
     appearance: none;
-
+    cursor: pointer;
     padding:0;
     border-radius:0;
     vertical-align: middle;
@@ -69,83 +82,223 @@ body{
 
 #colorSelector input:checked{
     box-shadow: 0px 0px;
-    border: 1px rgb(0, 0, 0) solid;
-    background-clip: margin-box;
-    transition:250ms;
+    transform: translate(8px,8px);
+    transition:150ms;
+}
+
+#colorSelector input:checked + label{
+    transition:150ms;
+    /* text-shadow : 1px 1px 10px #e7e7e7, 1px 1px #747474; */
+}
+
+#black:checked + label{
+    background-color: black;
+}
+#red:checked + label{
+    background-color: red;
+}
+#blue:checked + label{
+    background-color: blue;
+}
+#green:checked + label{
+    background-color: green;
+}
+#yellow:checked + label{
+    background-color: yellow;
+}
+#pink:checked + label{
+    background-color: pink;
+}
+#rainbow:checked + label{
+    background: -webkit-linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px;
+
+}
+#eraser:checked + label{
+    background-color: white;
 }
 
 
 #black{
-    background: rgb(29, 29, 29); 
-    box-shadow: 5px 5px #000000;
+    background: rgb(29, 29, 29);
+    box-shadow: 8px 8px #000000;
 }
 #red{
     background: red;
-    box-shadow: 5px 5px #9c1616;
+    box-shadow: 8px 8px #9c1616;
 }
 #blue{
     background: blue; 
-    box-shadow: 5px 5px #0000b3
+    box-shadow: 8px 8px #0000b3
     ;
 }
 #green{
     background: green; 
-    box-shadow: 5px 5px #006400;
+    box-shadow: 8px 8px #006400;
 }
 #yellow{
     background: yellow; 
-    box-shadow: 5px 5px #afaf00;
+    box-shadow: 8px 8px #afaf00;
 }
 #pink{
     background: pink; 
-    box-shadow: 5px 5px rgb(226, 161, 172);
-}
-#rainbow{
-    background: yellow; 
-    box-shadow: 5px 5px red;
+    box-shadow: 8px 8px #e2a1ac;
 }
 #eraser{
     background: white; 
     box-shadow: 5px 5px rgb(187, 187, 187);
 }
-
-#colorSelector label{
-    display: flex;
-    padding-top: 10px;
-
+#rainbow{
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet, red);
+    box-shadow: 8px 8px #2c2c2c;
+    background-size: 150% 100%;
+    height: 50px;
+    animation: gradient 500s linear infinite;
+    
 }
-
-label[for="black"]{
-    color: black;
-}
-label[for="red"]{
-    color: red;
-}
-label[for="blue"]{
-    color: blue;
-}
-label[for="green"]{
-    color: green;
-}
-label[for="yellow"]{
-    color: yellow;
-}
-label[for="pink"]{
-    color: pink;
-}
-label[for="rainbow"]{
-    color: rgb(0, 128, 43);
-}
-label[for="eraser"]{
-    color: white;
-}
-
-
+@keyframes gradient {
+    from {
+      background-position: 0 0;
+    }
+  /*use negative width if you want it to flow right to left else and positive for left to right*/
+    to {
+      background-position: -10000px 0;
+    }
+  }
+ 
 
 #rightButtons {
+    display: grid;
     grid-area: right_buttons;
-    font-family: 'Bungee Inline', cursive;
+    align-items: center;
+    grid-template-areas: 
+    "water_color_grid"
+    "shake_grid"
+    "grid_grid";
 }
+
+#waterColor{
+    grid-area: water_color_grid;
+    margin-top: 50px;
+    appearance: none;
+    cursor: pointer;
+    padding:0;
+    border-radius:0;
+    outline:0;
+    width: 50px;
+    height: 50px;
+    margin-left: 0;
+    border-radius: 25px;
+    background: linear-gradient(90deg, #a7e5e7, #549aeb, #a5c5ee, #84b4e0, #a7e7e7);
+    box-shadow: 8px 8px #39728b;
+    background-size: 150% 100%;
+    animation: gradient 500s linear infinite;
+
+}
+#waterColor + label{
+    grid-area: water_color_grid;
+    text-align: center;
+    margin-left: 70px;
+    padding-top: 60px;
+    font-size: 25px;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px;
+}
+
+#waterColor:checked{
+    box-shadow: 0px 0px;
+    transform: translate(8px,8px);
+    transition:150ms;
+}
+
+
+#waterColor:checked + label{
+    background: -webkit-linear-gradient(45deg, #a7e5e7, #549aeb, #a5c5ee, #84b4e0, #a7e7e7);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px;
+}
+
+
+ 
+#shake {
+    grid-area: shake_grid;
+    justify-self: center;
+    font-family: 'Bungee', cursive;
+    margin-bottom: 55px;
+    font-size: 30px;
+    width: 200px;
+    height: 100px;
+    background: #e03131;
+    text-align: center;
+    line-height: 45px;
+    border-radius: 36px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  #shake:hover {
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    perspective: 1000px;
+  }
+
+  #gridSize{
+    grid-area: grid_grid;
+    align-self: normal;
+    margin-top: 30px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    width: 250px;
+    height: 15px;
+    background: #e03131;
+    outline: none;
+    border: 2px solid #000000;    
+}
+
+/* for chrome/safari */
+#gridSize::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 40px;
+    background: #e03131;
+    cursor: pointer;
+    border: 2px solid #000000;
+    }
+    
+/* for firefox */
+#gridSize::-moz-range-thumb {
+width: 20px;
+height: 40px;
+background: #e03131;
+cursor: pointer;
+border: 2px solid #000000;
+}
+
+#gridSize + label, #sliderOutput{
+    grid-area: grid_grid;
+    align-self: normal;
+    margin-top: 80px;
+    font-size: 25px;
+    -webkit-text-fill-color: #e03131;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px;
+    text-align: center;
+}
+
+
+#sliderOutput{
+    margin-top: 120px;
+}
+  
 
 #sketchWrapper{
     display: grid;
@@ -158,6 +311,7 @@ label[for="eraser"]{
 }
 
 #sketchContainer {
+    cursor: pointer;
     grid-area: sketch_middle;
     background-color: rgb(245, 245, 245);
     display: grid; 
@@ -180,6 +334,36 @@ label[for="eraser"]{
     grid-area: sketch_right; 
 }
 
+#keyBoardReminder{
+    display: none;
+    margin-top: 120px;
+    margin-left: 30px;
+    width: 140px;
+    height: 115px;
+    background:linear-gradient(to top right, rgb(236, 236, 236) 60%, rgb(78, 78, 77) 75%, rgba(245, 245, 245, 0) 75%, rgba(245, 245, 245, 0) 100%);
+    padding-top: 68px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #1c0edbe8;
+    position: relative;
+    border-radius:100%;
+    text-align: center;
+    box-shadow: 0 0 0 1px smokewhite;      
+    transform: rotate(30deg);
+  }
+
+
+  #keyBoardReminder:before{
+    content:"";
+    position: absolute;
+    top:-90px;
+    left:91px;
+    width: 180px;
+    height: 180px;
+    background:linear-gradient(to bottom left, transparent 75%, rgb(204, 204, 204) 75%, rgb(70, 70, 70) 100%);
+    border-radius:100%; 
+  }
+
 .dial{
     height: 150px;
     position: absolute;
@@ -195,6 +379,7 @@ label[for="eraser"]{
 }
 
 footer{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     position: fixed;
     display: grid;
     left: 0;
@@ -205,9 +390,8 @@ footer{
     font-size: 18px;
     grid-template-areas: "footer_left footer_middle footer_right";
     grid-template-columns: 1fr 30px 1fr;
-    
-    
 }
+
 footer p{
     grid-area: footer_left;
     text-align: end;

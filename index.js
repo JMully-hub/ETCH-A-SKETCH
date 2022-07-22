@@ -154,6 +154,10 @@ function makeGrid(){
             newSquare.addEventListener('mousedown', function(){
                 turnDialsOnMouse(newSquare);
                 colorThisSquare(newSquare);
+                if (!keyBoardStickerShown){ // only do this once on first click on pad
+                    keyBoardReminder.setAttribute('style', 'display: block;')
+                    keyBoardStickerShown = true;
+                    }
                 currentSquarePosition = newSquare;
             }, false);
             
@@ -233,6 +237,10 @@ const rightDial = document.getElementById('rightDial');
 let leftRotation = 0;
 let rightRotation = 0;
 let rotationDegree = 10;
+
+//keyboard reminder sticker
+let keyBoardStickerShown = false;
+const keyBoardReminder = document.getElementById('keyBoardReminder');
 
 // init
 makeGrid();
