@@ -37,8 +37,6 @@ body{
     height: 40px;
     grid-area: top_main_middle;
     display: flex;
-    /* padding-bottom: 20px;
-    padding-top:10px; */
     align-items:center;
     justify-content: center;
     width: 100%;    
@@ -60,15 +58,15 @@ body{
 
 .buttonDiv{
 display: flex;
+align-items: baseline;
 margin-top: 10px;
 margin-bottom: 10px;
 height:60px;
 }
 
 #colorSelector label{
+    height:50px;
     margin-left: 20px;
-    margin-top: 22px;
-    margin-bottom: 1px;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
@@ -392,6 +390,7 @@ border: 2px solid #000000;
 }
 
 footer{
+    align-content: center;
     position: fixed;
     display: grid;
     left: 0;
