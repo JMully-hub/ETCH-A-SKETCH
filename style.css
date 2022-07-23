@@ -22,7 +22,7 @@ body{
     display: grid;
     width: 100vw; 
     grid-template-columns: 1fr 899px 1fr;
-    grid-template-rows: 120px 735px;
+    grid-template-rows: 60px 735px;
     position: relative;
     justify-items: center;
     grid-template-areas:
@@ -31,16 +31,19 @@ body{
 }
 
 .top{
+    margin: 10px;
+    display: block;
+    height: 40px;
     grid-area: top_main_middle;
     display: flex;
+    /* padding-bottom: 20px;
+    padding-top:10px; */
     align-items:center;
     justify-content: center;
-    height: 60px;
     width: 100%;    
     font-family: 'Bungee Inline', cursive;
     font-size:50px;
-    margin-top:30px;
-    margin-bottom:30px;
+    line-height: 50px;
     color: #e03131;
     text-shadow: -1px -1px 0 #331d1d, 1px -1px 0 #331d1d, -1px 1px 0 #331d1d, 1px 1px 0 #331d1d;
 }
@@ -56,7 +59,8 @@ body{
 
 .buttonDiv{
 display: flex;
-padding-top: 20px;
+margin-top: 10px;
+height:60px;
 }
 
 #colorSelector label{
@@ -341,7 +345,7 @@ border: 2px solid #000000;
 #keyBoardReminder{
     display: none;
     margin-top: 120px;
-    margin-left: 30px;
+    margin-left: 10px;
     width: 140px;
     height: 115px;
     background:linear-gradient(to top right, rgb(236, 236, 236) 60%, rgb(78, 78, 77) 75%, rgba(245, 245, 245, 0) 75%, rgba(245, 245, 245, 0) 100%);
