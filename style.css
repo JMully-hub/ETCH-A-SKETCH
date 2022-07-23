@@ -61,12 +61,14 @@ body{
 .buttonDiv{
 display: flex;
 margin-top: 10px;
+margin-bottom: 10px;
 height:60px;
 }
 
 #colorSelector label{
     margin-left: 20px;
     margin-top: 22px;
+    margin-bottom: 1px;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
@@ -413,7 +415,7 @@ footer p{
     grid-area: footer_middle;
     height: 20px;
     justify-self: center;
-    padding-top: 4px;
+    align-self: center;
 }
 
 footer a{
