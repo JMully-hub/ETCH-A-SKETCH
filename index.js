@@ -243,4 +243,4 @@ let keyBoardStickerShown = false;
 const keyBoardReminder = document.getElementById('keyBoardReminder');
 
 // init
-window.onload(makeGrid());
+window.onload = makeGrid;
