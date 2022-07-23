@@ -22,12 +22,13 @@ body{
     display: grid;
     width: 100vw; 
     grid-template-columns: 1fr 899px 1fr;
-    grid-template-rows: 60px 735px;
+    grid-template-rows: 60px 735px 60px;
     position: relative;
     justify-items: center;
     grid-template-areas:
     "top_mai_left top_main_middle top_main_right"
-    "left_buttons middle_content right_buttons";
+    "left_buttons middle_content right_buttons"
+    "bottom_space bottom_space bottom_space";
 }
 
 .top{
