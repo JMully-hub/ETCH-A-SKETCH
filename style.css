@@ -189,6 +189,7 @@ height:60px;
 }
 
 #waterColor{
+    z-index: 3;
     grid-area: water_color_grid;
     margin-top: 50px;
     appearance: none;
