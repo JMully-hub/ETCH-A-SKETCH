@@ -2,6 +2,7 @@
 
 body{
     margin: 0;
+    padding: 0;
     font-family: 'Bungee', cursive;
 
     background: no-repeat center center fixed;
@@ -18,26 +19,26 @@ body{
 
 
 .mainContainer{
-    /* margin-top: 100px; */
     display: grid;
     width: 100vw; 
     grid-template-columns: 1fr 1005px 1fr;
     position: relative;
     justify-items: center;
     grid-template-areas:
-    "top_main top_main top_main"
+    "top_mai_left top_main_middle top_main_right"
     "left_buttons middle_content right_buttons";
 }
 
 .top{
-    grid-area: top_main;
-    margin: 20px;
-    height: 40px;
-    width: 100%;
+    grid-area: top_main_middle;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 60px;
+    width: 100%;    
     font-family: 'Bungee Inline', cursive;
-    font-size: 60px;
-    text-align: center;
-    padding-bottom: 20px;
+    font-size:50px;
+    margin:0;
     color: #e03131;
     text-shadow: -1px -1px 0 #331d1d, 1px -1px 0 #331d1d, -1px 1px 0 #331d1d, 1px 1px 0 #331d1d;
 }
@@ -46,11 +47,12 @@ body{
 #leftButtons{
     grid-area: left_buttons;
     font-size: 25px;
+    padding-top: 80px;
 }
 
 .buttonDiv{
 display: flex;
-margin-top: 40px;
+padding-top: 20px;
 }
 
 #colorSelector label{
@@ -86,8 +88,7 @@ margin-top: 40px;
 
 #colorSelector input:checked + label{
     transition:150ms;
-    /* text-shadow : 1px 1px 10px #e7e7e7, 1px 1px #747474; */
-}
+   }
 
 #black:checked + label{
     background-color: black;
@@ -345,6 +346,8 @@ border: 2px solid #000000;
     color: #1c0edbe8;
     position: relative;
     border-radius:100%;
+    font-size: 18px;
+    line-height:18px;
     text-align: center;
     box-shadow: 0 0 0 1px smokewhite;      
     transform: rotate(30deg);
