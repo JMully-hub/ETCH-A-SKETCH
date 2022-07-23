@@ -21,7 +21,8 @@ body{
 .mainContainer{
     display: grid;
     width: 100vw; 
-    grid-template-columns: 1fr 1005px 1fr;
+    grid-template-columns: 1fr 899px 1fr;
+    grid-template-rows: 120px 735px;
     position: relative;
     justify-items: center;
     grid-template-areas:
@@ -38,16 +39,19 @@ body{
     width: 100%;    
     font-family: 'Bungee Inline', cursive;
     font-size:50px;
-    margin:0;
+    margin-top:30px;
+    margin-bottom:30px;
     color: #e03131;
     text-shadow: -1px -1px 0 #331d1d, 1px -1px 0 #331d1d, -1px 1px 0 #331d1d, 1px 1px 0 #331d1d;
 }
 
 
 #leftButtons{
+    display: flex;
     grid-area: left_buttons;
     font-size: 25px;
-    padding-top: 80px;
+    padding-top: 60px;
+    overflow-y:auto;
 }
 
 .buttonDiv{
@@ -304,7 +308,7 @@ border: 2px solid #000000;
     grid-area: middle_content;
     position: relative;
     justify-content: center;
-    grid-template-columns: 237px 530px 237px; 
+    grid-template-columns:  212px 475px 212px; 
     grid-template-areas: "sketch_left sketch_middle sketch_right";
     
 }
@@ -314,15 +318,16 @@ border: 2px solid #000000;
     grid-area: sketch_middle;
     background-color: rgb(245, 245, 245);
     display: grid; 
-    width: 530px;
-    height: 530px;
+    width: 475px;
+    height: 475px;
     row-gap: 1px;
     position: absolute;
-    top: 135px; 
+    top: 120px; 
 }
 
 #sketcherImage{
     grid-area: sketch_left;
+    width:900px;
 }
 
 #sketchLeft{
@@ -366,7 +371,7 @@ border: 2px solid #000000;
   }
 
 .dial{
-    height: 150px;
+    height: 135px;
     position: absolute;
     bottom: 0;
 }
@@ -380,7 +385,6 @@ border: 2px solid #000000;
 }
 
 footer{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     position: fixed;
     display: grid;
     left: 0;
